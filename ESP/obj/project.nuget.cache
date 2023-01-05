@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Gq5udN8SZ0bYx+ZwXZqgE27AEV1+xIi2EgURup5RHWRJqi1Lwqr9IQMyvzK7/H+lkdywDU3URvvtGLFBRVIt5A==",
+  "success": true,
+  "projectFilePath": "D:\\repos\\assault-cube-esp\\ESP\\ESP.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Camel\\.nuget\\packages\\swed32\\1.1.0\\swed32.1.1.0.nupkg.sha512"
+  ],
+  "logs": []
+}
