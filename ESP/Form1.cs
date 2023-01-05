@@ -31,9 +31,19 @@ public partial class Form1 : Form
                     {
                         if (e.team != localPlayer.team)
                         {
-                            var angles = m.CalcAngles(localPlayer, e);
-                            m.Aim(localPlayer,angles.X,angles.Y);
-                            break;  
+                            if( Methods.CalcDistance(localPlayer,e) < 100)
+
+                            {
+                                var angles = m.CalcAngles(localPlayer, e);
+                                m.Aim(localPlayer, angles.X, angles.Y);
+                                break;
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("[ ! ] AIMBOT TARGET IS TOO FAR AWAY");
+                                Console.ForegroundColor = ConsoleColor.White;
+                            }
                         }
                     }
             }

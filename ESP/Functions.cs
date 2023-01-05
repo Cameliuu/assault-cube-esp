@@ -59,7 +59,7 @@ public class Methods
     public void Aim(Entity localPlayer, float x, float y)
     {
         mem.WriteFloat(localPlayer.baseAdress, Offsets.vAngles, x);
-        mem.WriteFloat(localPlayer.baseAdress, Offsets.vAngles + 0x4, y);
+        mem.WriteFloat(localPlayer.baseAdress, Offsets.vAngles + 0x4,y);
     }
 
 
