@@ -86,6 +86,56 @@ public class Methods
         return entities;
     }
 
+    public Point WorldToScreen(ViewMatrix viewMatrix, Vector3 pos, int width, int height)
+    {
+        var twoD = new Point();
+        float screenW = (viewMatrix.m14 * pos.X) + (viewMatrix.m24 * pos.Y) + (viewMatrix.m34 * pos.Z) + viewMatrix.m44;
+        if (screenW > 0.001f)
+        {
+            float screenX = (viewMatrix.m11 * pos.X) + (viewMatrix.m21 * pos.Y) + (viewMatrix.m31 * pos.Z) +
+                            viewMatrix.m41;
+            float screenY = (viewMatrix.m12 * pos.X) + (viewMatrix.m22 * pos.Y) + (viewMatrix.m32 * pos.Z) +
+                            viewMatrix.m42;
+            float camX = width / 2f;
+            float camY = height / 2f;
+            float X = camX + (camX * screenX / screenW);
+            float Y = camY + (camY * screenY / screenW);
+
+            twoD.X = (int)X;
+            twoD.Y = (int)Y;
+            return twoD;
+
+        }
+        else
+            return new Point(-99, -99);
+    }
+
+    public ViewMatrix ReadViewMatrix()
+    {
+        var viewMatrix = new ViewMatrix();
+        var mtx = mem.ReadMatrix(moduleBase + Offsets.iViewMatrix);
+        viewMatrix.m11 = mtx[0];
+        viewMatrix.m12 = mtx[1];
+        viewMatrix.m13 = mtx[2];
+        viewMatrix.m14 = mtx[3];
+        
+        viewMatrix.m21 = mtx[4];
+        viewMatrix.m22 = mtx[5];
+        viewMatrix.m23 = mtx[6];
+        viewMatrix.m24 = mtx[7];
+        
+        viewMatrix.m31 = mtx[8];
+        viewMatrix.m32 = mtx[9];
+        viewMatrix.m33 = mtx[10];
+        viewMatrix.m34 = mtx[11];
+        
+        viewMatrix.m41 = mtx[12];
+        viewMatrix.m42 = mtx[13];
+        viewMatrix.m43 = mtx[14];
+        viewMatrix.m44 = mtx[15];
+        return viewMatrix;
+    }
+
     public Methods()
     {
         mem = new Swed("ac_client");

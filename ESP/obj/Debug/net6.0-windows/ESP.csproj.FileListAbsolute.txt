@@ -17,3 +17,5 @@ D:\repos\assault-cube-esp\ESP\obj\Debug\net6.0-windows\ESP.genruntimeconfig.cach
 D:\repos\assault-cube-esp\ESP\obj\Debug\net6.0-windows\ref\ESP.dll
 D:\repos\assault-cube-esp\ESP\obj\Debug\net6.0-windows\ESP.Form1.resources
 D:\repos\assault-cube-esp\ESP\obj\Debug\net6.0-windows\ESP.csproj.GenerateResource.cache
+D:\repos\assault-cube-esp\ESP\bin\Debug\net6.0-windows\ezOverLay.dll
+D:\repos\assault-cube-esp\ESP\bin\Debug\net6.0-windows\ezOverLay.pdb
