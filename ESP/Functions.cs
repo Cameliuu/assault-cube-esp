@@ -62,6 +62,15 @@ public class Methods
         mem.WriteFloat(localPlayer.baseAdress, Offsets.vAngles + 0x4,y);
     }
 
+    public Rectangle CalcRect(Point feet, Point head)
+    {
+        var rect = new Rectangle();
+        rect.X = head.X - (feet.Y - head.Y) / 4;
+        rect.Y = head.Y;
+        rect.Width = (feet.Y - head.Y) / 2;
+        rect.Height = (feet.Y - head.Y);
+        return rect;
+    }
 
     public List<Entity> ReadEntities(Entity localPlayer)
     {
@@ -99,7 +108,7 @@ public class Methods
             float camX = width / 2f;
             float camY = height / 2f;
             float X = camX + (camX * screenX / screenW);
-            float Y = camY + (camY * screenY / screenW);
+            float Y = camY - (camY * screenY / screenW);
 
             twoD.X = (int)X;
             twoD.Y = (int)Y;

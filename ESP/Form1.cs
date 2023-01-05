@@ -77,12 +77,15 @@ public partial class Form1 : Form
             {
                 if (localPlayer.team == ent.team)
                 {
+                    g.DrawRectangle(green,m.CalcRect(wtsFeet,wtsHed));
                     g.DrawLine(green, new Point(Width / 2, Height / 2),wtsFeet);
-                    Console.WriteLine("Drawing");
+                    
                 }
                 else
                 {
+                    g.DrawRectangle(red, m.CalcRect(wtsFeet, wtsHed));
                     g.DrawLine(red,new Point(Width / 2, Height / 2), wtsFeet);
+                    Console.WriteLine(m.CalcRect(wtsFeet,wtsHed));
                 }
             }
         }
