@@ -12,7 +12,7 @@ public class Offsets
         vAngles = 0x34,
         vHealth = 0xEC,
         vName = 0x205,
-        vAlive = 0xB4,
+        vAlive = 0xB4,  
         vTeam = 0x01B8,
         vAmmo = 0x140;
 }
