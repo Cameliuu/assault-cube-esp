@@ -4,6 +4,8 @@ namespace ESP;
 
 public partial class Form1 : Form
 {
+    [DllImport("user32.dll")]
+    static extern short GetAsyncKeyState(Keys vKey);
     private Methods? m;
     private Entity localPlayer = new Entity();
     public Form1()
@@ -21,6 +23,22 @@ public partial class Form1 : Form
             m = new Methods();
             localPlayer=m.ReadLocalPlayer();
             var entities = m.ReadEntities(localPlayer);
+            entities = entities.OrderBy(x => x.mag).ToList();
+            if (GetAsyncKeyState(Keys.F1) < 0)
+            {
+                if(entities.Count > 0)
+                    foreach (var e in entities)
+                    {
+                        if (e.team != localPlayer.team)
+                        {
+                            var angles = m.CalcAngles(localPlayer, e);
+                            m.Aim(localPlayer,angles.X,angles.Y);
+                            break;  
+                        }
+                    }
+            }
+
+            Thread.Sleep(20);
         }
     }
 
@@ -30,14 +48,13 @@ public partial class Form1 : Form
 
         CheckForIllegalCrossThreadCalls = false;
         m = new Methods();
-        if (m == null)
+        if (m != null)
         {
             Thread thread = new Thread(Main) {IsBackground = true};
             thread.Start();
         }
 
-        localPlayer=m.ReadLocalPlayer();
-        var entities = m.ReadEntities(localPlayer);
+       
         int i = 6;
     }
 }

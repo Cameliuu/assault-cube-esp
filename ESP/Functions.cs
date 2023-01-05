@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Numerics;
+using System.Text;
 using Swed32;
 namespace ESP;
 
@@ -16,7 +17,7 @@ public class Methods
         Console.WriteLine($"[ + ] LOADED LOCAL PLAYER NAMED {localPlayer.name}");
         return localPlayer;
     }
-
+    
     public Entity ReadEntity(IntPtr entBase)
     {
         Console.WriteLine("Reading entity");
@@ -38,6 +39,29 @@ public class Methods
                                 Math.Pow(target.feetPos.Y - localPlayer.feetPos.Y, 2) +
                                 Math.Pow(target.feetPos.Z - localPlayer.feetPos.Z, 2));
     }
+    public static float CalcDistance(Entity localPlayer, Entity target)
+    {
+        return (float)Math.Sqrt(Math.Pow(target.feetPos.X - localPlayer.feetPos.X, 2) +
+                                Math.Pow(target.feetPos.Y - localPlayer.feetPos.Y, 2));
+    }
+    public Vector2 CalcAngles(Entity localPlayer, Entity target)
+    {
+        float x, y;
+        var deltaX = target.headPos.X - localPlayer.headPos.X;
+        var deltaY = target.headPos.Y - localPlayer.headPos.Y;
+        var deltaZ = target.headPos.Z - localPlayer.headPos.Z;
+        var dist = CalcDistance(localPlayer, target);
+        x = (float)(Math.Atan2(deltaY, deltaX) * 180 / Math.PI) + 90;
+        y = (float)(Math.Atan2(deltaZ, dist) * 180 / Math.PI);
+        return new Vector2(x, y);
+    }
+
+    public void Aim(Entity localPlayer, float x, float y)
+    {
+        mem.WriteFloat(localPlayer.baseAdress, Offsets.vAngles, x);
+        mem.WriteFloat(localPlayer.baseAdress, Offsets.vAngles + 0x4, y);
+    }
+
 
     public List<Entity> ReadEntities(Entity localPlayer)
     {

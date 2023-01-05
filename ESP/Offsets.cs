@@ -13,6 +13,6 @@ public class Offsets
         vHealth = 0xEC,
         vName = 0x205,
         vAlive = 0xB4,  
-        vTeam = 0x01B8,
+        vTeam = 0x30C,
         vAmmo = 0x140;
 }
